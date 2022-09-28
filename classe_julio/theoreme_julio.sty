@@ -1,0 +1,158 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% --- Package pour les théorèmes de Jules --- %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\NeedsTeXFormat{LaTeX2e}[1999/01/01]
+\ProvidesPackage{theoreme_julio}
+
+
+\RequirePackage[dvipsnames]{xcolor}
+\RequirePackage{macros_math_julio}
+\RequirePackage{latexsym}
+\RequirePackage{multido}
+\RequirePackage{framed}\RequirePackage[amsmath,thmmarks,hyperref,framed]{ntheorem}
+
+\newif \if@anglais \@anglaisfalse
+\DeclareOption{anglais}{\@anglaistrue}
+\ProcessOptions
+
+\makeatletter
+\let\@@magyar@captionfix\relax
+\let\th@plain\relax
+\makeatother
+
+%% Commandes
+
+\newcommand{\newthm}[8][]{
+							\setlength\theorempreskipamount{0pt}%
+							\setlength\theorempostskipamount{-1pt}%
+							\theoremstyle{#6}
+                            \theoremsymbol{#1}
+                            \theorembodyfont{#7}
+                            \theoremseparator{#8}
+                            \makeatletter
+                              \newenvironment{#2}[1][]{%
+                              \def\FrameCommand{{\color{#4}\vrule width 1pt}\hspace{6pt}}
+                              \MakeFramed{\advance\hsize-\width \FrameRestore}
+                              \kern0ex % pour la barre de gauche
+                              \ifcat$\detokenize{##1}$
+                                \begin{theorem_#2}%
+                              \else 
+                                \begin{theorem_#2}[\text{\normalfont\itshape ##1}]%
+                              \fi}%
+                              {\end{theorem_#2}\endMakeFramed}
+                            \makeatother
+                            \theoremheaderfont{\bfseries\scshape\color{#5}} 
+                            \newtheorem{theorem_#2}{#3}
+                           }
+
+%% Création des théorèmes
+\if@anglais
+
+\newthm{defi}{Definition}{Green}{black}{nonumberbreak}{\normalfont}{:}
+\newthm{defprop}{Definition-Proposition}{Green}{black}{nonumberbreak}{\normalfont}{:}
+\newthm{prop}{Property}{teal}{black}{nonumberbreak}{\normalfont}{:}
+\newthm{corol}{Corollary}{cyan}{black}{break}{\normalfont}{:}
+
+\newthm{thm}{Theorem}{RedOrange}{black}{nonumberbreak}{\normalfont}{:}
+\newthm{lemme}{Lemma}{purple}{black}{nonumberbreak}{\normalfont}{:}
+\newthm{lemm}{Lemma}{purple}{black}{emptybreak}{\normalfont}{:}
+\newthm{coro}{Corollary{Peach}{black}{nonumberbreak}{\normalfont}{:}
+
+\newthm{enonc}{Statement}{Orchid}{black}{emptybreak}{\normalfont}{:}
+
+
+\theoremprework{%
+\setlength\theorempreskipamount{\topsep}\setlength\theorempostskipamount{\topsep}
+}
+\theoremstyle{plain}
+
+\theoremheaderfont{\bfseries \itshape}
+\theoremseparator{:}
+\newtheorem*{nb}{NB}
+
+\theoremheaderfont{\bfseries}
+\theoremprework{%
+\setlength\theorempreskipamount{\topsep}\setlength\theorempostskipamount{\topsep}
+}
+\newtheorem*{Rq}{Remark}
+
+\theoremheaderfont{\itshape}
+
+\theoremprework{%
+\setlength\theorempreskipamount{\topsep}\setlength\theorempostskipamount{\topsep}
+}
+\newtheorem*{Idee}{Idea}
+
+\theoremheaderfont{\normalfont}
+
+\theoremprework{%
+\setlength\theorempreskipamount{\topsep}\setlength\theorempostskipamount{\topsep}
+}
+\newtheorem*{ex}{Example}
+
+
+\theoremsymbol{$\square$}
+
+\theoremprework{%
+\setlength\theorempreskipamount{\topsep}\setlength\theorempostskipamount{\topsep}
+}
+\theoremheaderfont{\bfseries\itshape}
+\newtheorem*{prv}{Proof}
+
+\else
+
+\newthm{defi}{D\'efinition}{Green}{black}{nonumberbreak}{\normalfont}{:}
+\newthm{defprop}{D\'efinition-Proposition}{Green}{black}{nonumberbreak}{\normalfont}{:}
+\newthm{prop}{Propri\'et\'e}{teal}{black}{nonumberbreak}{\normalfont}{:}
+\newthm{corol}{Corollaire}{cyan}{black}{break}{\normalfont}{:}
+
+\newthm{thm}{Th\'eor\`eme}{RedOrange}{black}{nonumberbreak}{\normalfont}{:}\newthm{lemme}{Lemme}{purple}{black}{nonumberbreak}{\normalfont}{:}
+\newthm{lemm}{Lemme}{purple}{black}{emptybreak}{\normalfont}{:}
+\newthm{coro}{Corollaire}{Peach}{black}{nonumberbreak}{\normalfont}{:}
+
+\newthm{enonc}{\'Enonc\'e}{Orchid}{black}{emptybreak}{\normalfont}{:}
+
+
+\theoremstyle{plain}% default
+
+\theoremprework{%
+\setlength\theorempreskipamount{\topsep}\setlength\theorempostskipamount{\topsep}
+}
+
+\theoremheaderfont{\bfseries \itshape}
+\theoremseparator{:}
+\newtheorem*{nb}{NB}
+
+\theoremheaderfont{\bfseries}
+\theoremprework{%
+\setlength\theorempreskipamount{\topsep}\setlength\theorempostskipamount{\topsep}
+}
+\newtheorem*{Rq}{Remarque}
+
+\theoremheaderfont{\itshape}
+
+\theoremprework{%
+\setlength\theorempreskipamount{\topsep}\setlength\theorempostskipamount{\topsep}
+}
+\newtheorem*{Idee}{Idée}
+
+\theoremheaderfont{\normalfont}
+
+\theoremprework{%
+\setlength\theorempreskipamount{\topsep}\setlength\theorempostskipamount{\topsep}
+}
+\newtheorem*{ex}{Exemple}
+
+
+\theoremsymbol{$\square$}
+
+\theoremprework{%
+\setlength\theorempreskipamount{\topsep}\setlength\theorempostskipamount{\topsep}
+}
+\theoremheaderfont{\bfseries\itshape}
+\newtheorem*{prv}{Preuve}
+
+\fi
+
+\endinput

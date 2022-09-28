@@ -1,0 +1,199 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% --- Package pour les cours de maths de Jules --- %
+% --- -> commandes personnalisees                --- %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\NeedsTeXFormat{LaTeX2e}[1999/01/01]
+\ProvidesPackage{macros_math_julio}
+
+%% Packages
+
+\RequirePackage{amsmath} %mise en page des maths
+\RequirePackage{stmaryrd} %symboles mathématiques moins usuels (overrightarrow{•}...)
+\RequirePackage{amssymb}
+\RequirePackage{mathrsfs}
+\RequirePackage{dsfont}
+\RequirePackage{mathtools}
+\RequirePackage[all,2cell,cmtip]{xy}
+\UseAllTwocells
+\RequirePackage{cancel}
+\RequirePackage{faktor}
+\RequirePackage{esint} % intégrales
+\RequirePackage{mathdots}  %points de matrices
+\usepackage{multirow}
+
+\DeclareOption*{}
+\ProcessOptions
+
+%% Opérateurs
+
+\DeclareMathOperator{\dd}{d}
+\DeclareMathOperator*{\infe}{inf}
+\DeclareMathOperator{\pgcd}{pgcd}
+\DeclareMathOperator{\ppcm}{ppcm}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\comat}{comat}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\car}{car}
+\DeclareMathOperator{\diag}{diag}
+
+%Morphismes 
+
+\DeclareMathOperator{\rg}{rg}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\id}{id}
+
+%Catégories
+
+\DeclareMathOperator{\Ob}{Ob}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\cod}{cod}
+\DeclareMathOperator{\Mat}{\bf{}Mat}
+\DeclareMathOperator{\Grp}{\bf{}Grp}
+\DeclareMathOperator{\Set}{\bf{}Set}
+\DeclareMathOperator{\Ring}{\bf{}Ring}
+\DeclareMathOperator{\Top}{\bf{}Top}
+\DeclareMathOperator{\Vect}{\bf{}Vect}
+\DeclareMathOperator{\Bbold}{\bf{}B}
+\DeclareMathOperator{\Htpy}{\bf{}Htpy}
+\DeclareMathOperator{\Cat}{\bf{}Cat}
+\DeclareMathOperator{\Ab}{\bf{}Ab}
+\DeclareMathOperator{\Ass}{\bf{}Ass}
+\DeclareMathOperator{\Lie}{\bf{}Lie}
+\DeclareMathOperator{\y}{\bf{}y}
+\DeclareMathOperator{\Fun}{Fun}
+
+
+
+
+% Espaces
+
+\DeclareMathOperator{\Ld}{L}
+
+
+%% commandes
+	
+	\newcommand{\ensemble}[1]{\ensuremath{\mathbb{#1}}\xspace}
+	\newcommand{\calligraphie}[1]{\ensuremath{\mathcal{#1}}\xspace}
+	\newcommand{\cursive}[1]{\ensuremath{\mathscr{#1}}\xspace}
+	\newcommand{\goth}[1]{\ensuremath{\mathfrak{#1}}\xspace}
+	
+	% commandes d'ensembles
+		
+	\DeclareMathOperator\vect{Vect}		
+		
+		\newcommand{\mat}[2]{\ensuremath{\mathcal{M}_{#1} \left( #2 \right)}} % matrices
+	
+		\newcommand{\Fonctions}[2]{\ensuremath{\mathcal{F} \left( #1 , #2 \right)}} % espaces de fonctions
+	
+		\newcommand{\Ens}[2]{\ensuremath{ \left\{ #1 \middle| #2 \right\} }}
+	
+	
+	 % définition d'ensembles
+		
+		\newcommand{\op}[1]{\ensuremath{#1^{\text{op}}}}		
+		
+		\newcommand{\homo}[3][]{\hom_{#1} \left( #2 , #3\right)}
+		\newcommand{\Homo}[3][]{\Hom_{#1} \left( #2,#3 \right)} %homomorphismes
+	
+		\newcommand{\auto}[1]{\Aut \left( #1 \right)}
+
+
+	% commandes d'opérations
+	
+	\newcommand{\croch}[3]{\ensuremath{\left[ #1 \right]_{#2}^{#3}}}
+	
+	% commandes de symboles
+	
+	\renewcommand{\iff}{\if@display\quad\Longleftrightarrow\quad\else\Leftrightarrow\fi}
+	\renewcommand{\implies}{\if@display\quad\Longrightarrow\quad\else\Rightarrow\fi}
+	
+	\newcommand{\inj}{\lhook\joinrel\longrightarrow}  % injections
+	\newcommand{\surj}{\relbar\joinrel\twoheadrightarrow} % surjections
+	
+	%% Connecteurs logiques
+	\newcommand{\et}{\text{ et }}
+	\newcommand{\etq}{\quad\text{et}\quad}
+	\newcommand{\etqq}{\qquad\text{et}\qquad}
+	\newcommand{\ou}{\text{ ou }}
+	\newcommand{\ouq}{\quad\text{ou}\quad}
+	\newcommand{\ouqq}{\qquad\text{ou}\qquad}
+	\newcommand{\donc}{\quad\text{donc}\quad}
+	\newcommand{\avec}{\quad\text{avec}\quad}
+	\newcommand{\ie}{\text{\textit{i. e.}}\xspace}
+	\newcommand{\ieq}{\quad\text{\textit{i. e.}}\quad}
+	\newcommand{\cad}{\quad\text{c'est-à-dire}\quad}
+	\newcommand{\cadq}{\qquad\text{c'est-à-dire}\qquad}
+
+%% Définitions
+
+	%% ensembles
+
+%ensembles classiques
+
+\def\R{\ensemble{R}}
+\def\C{\ensemble{C}}
+\def\K{\ensemble{K}}
+\def\Q{\ensemble{Q}}
+\def\N{\ensemble{N}}
+\def\Z{\ensemble{Z}}
+\def\Lc{\ensemble{L}}
+\def\F{\ensemble{F}}
+\def\Esp{\ensemble{E}}
+
+\def\T{\calligraphie{T}}
+\def\L{\calligraphie{L}}
+\def\Exp{\calligraphie{E}}
+\def\Poi{\calligraphie{P}}
+\def\Bin{\calligraphie{B}}
+
+\def\Ba{\cursive{B}}
+\def\Co{\cursive{C}}
+\def\D{\cursive{D}}
+\def\E{\cursive{E}}
+\def\I{\cursive{I}}
+\def\J{\cursive{J}}
+\def\Part{\cursive{P}}
+
+\def\Alt{\goth{A}}
+\def\Sym{\goth{S}}
+\def\Faisc{\goth{F}}
+\def\Ifrak{\goth{I}}
+
+	% Familles et suites
+	
+		\renewcommand{\fam}[3]{\ensuremath{ \left({ #1}_{#2} \right)_{#2 \in #3} }}
+		\newcommand{\suite}[2][\N]{\ensuremath{ \fam{#2}{n}{#1} }}
+
+%% Fonctions
+
+\newcommand{\fun}[3]{\ensuremath{\begin{array}{rrcl}
+#1 : #2  \longrightarrow #3
+\end{array}}}
+
+\newcommand{\fonc}[4]{\ensuremath{
+\begin{array}{rcl}
+#1 & \longrightarrow & #2\\
+#3 & \longmapsto     & #4
+\end{array}
+}}
+
+\newcommand{\fonction}[5]{\ensuremath{
+\begin{array}[t]{rrcl}
+#1 \, : & #2 & \longrightarrow & #3\\
+           & #4 & \longmapsto     & #5 
+\end{array}
+}}
+
+%Diagrammes catégories
+
+\newcommand{\xytext}[1]{\raisebox{0.2em}{\xymatrix{#1}}}
+
+
+% trucs pratiques
+
+\DeclareMathOperator{\Tr}{Tr}
+\def\t{{}^t \!}   % Pour la transposée
+
+\endinput
