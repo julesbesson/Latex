@@ -31,48 +31,58 @@ It provides useful math packages and various macros, mathoperators and functions
 - *mathdots* for matrices dots.
 - *multirow*
 
-#### Math operators
+#### Macros
+
+##### Opérateurs
+
 Commande | Résultat
 :---: | :---:
  \dd | d 
  \infe | inf 
 \pgcd | pgcd
 \ppcm | ppcm
-\GL | GL
 \comat | comat
-\SL | SL
 \car | car
 \diag | diag
+\rg | rg
+\im | im
 
+##### Ensembles
+Commande | Résultat
+:---: | :---:
+\GL | GL
+\SL | SL
+\Ens{1}{2} | {1\|2}
+\Ld | L
+\vect | Vect
+\Fonctions{1}{2} | $\mathcal{F}(1,2)$
+\Aut{1} | $\text{Aut}(1)$
 
-<table>
-    <thead>
-        <tr>
-            <th colspan=2>Algèbre</th>
-            <th colspan = 2>Analyse</th>
-        </tr>
-        <tr>
-          <th>Commande</th>
-          <th>Résultat</th>
-          <th>Commande</th>
-          <th>Résultat</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>L1 Name</td>
-            <td>L2 Name A</td>
-            <td>L3 Name A</td>
-            <td>L3 Name A</td>
-        </tr>
-        <tr>
-            <td>L1 Name</td>
-            <td>L2 Name A</td>
-            <td>L3 Name A</td>
-            <td>L3 Name A</td>
-        </tr>
-    </tbody>
-</table>
+##### Théorie des catégories
+
+Commande | Résultat
+:---: | :---:
+\Ob | Ob
+\Hom | Ob
+\Homo[1]{2}{3} | $\text{Hom}_{1}(2,3)$
+\id | id
+\dom | dom
+\cod | cod
+\op{1} | $1^{\text{op}}$
+\Cat | **Cat**
+\Set | **Set**
+\Top | **Top**
+\Grp | **Grp**
+\Ring | **Ring**
+\Vect | **Vect**
+\Mat | **Mat**
+\B | **B**
+\Htpy | **Htpy**
+\Ab | **Ab**
+\Ass | **Ass**
+\Lie | **Lie**
+\y | **y**
+\Fun | Fun
 
 
 ## Work to do
