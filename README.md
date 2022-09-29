@@ -8,7 +8,7 @@ It provides useful theorem environnments:
 - ***prop*** is used for propositions following from a definition.
 - ***defprop*** is used for definition-propositions.
 - ***thm*** is used for theorems.
-- ***propo*** is used for proposition following from theorems.
+- ***propo*** is used for propositions following from theorems.
 - ***lemme*** is used for lemmas with a title.
 - ***lemm*** is used for lemmas without a title.
 - ***prv*** is used for proofs.
