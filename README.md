@@ -10,4 +10,7 @@ There are 4 directories which names describe their purposes perfectly.
 - `personal_packages` contains all my home-made packages.
 
 ## Work to do
-The class `article_perso.cls` is still unusable, but it is a work in progress, for now you can use packages.
+Write the packages
+- `algorithmes`
+
+and include them in the existing classes

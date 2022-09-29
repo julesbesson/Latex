@@ -21,3 +21,5 @@ Commande | Description
 Commande | Description
 :---: | :---:
 \serpent[$\delta$]{A}{B}{C}{E}{F}{G} | Trace le diagramme du serpent usuel avec $\delta$ comme morphisme.
+
+##
