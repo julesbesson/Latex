@@ -42,7 +42,7 @@
 %% and covered by LPPL is defined by the unpacking scripts (with
 %% extension .ins) which are part of the distribution.
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesClass{article}
+\ProvidesClass{article_modified}
               [2014/09/29 v1.4h
  Standard LaTeX document class]
 \newcommand\@ptsize{}

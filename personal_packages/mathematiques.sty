@@ -2,9 +2,14 @@
 % --- Package pour les cours de maths de Jules --- %
 % --- -> commandes personnalisees                --- %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Les options sont:
+% - anglais
+% - theoremes
+% - diagrammes
 
-\NeedsTeXFormat{LaTeX2e}[1999/01/01]
-\ProvidesPackage{macros_math_julio}
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{mathematics}
 
 %% Packages
 
@@ -14,16 +19,35 @@
 \RequirePackage{mathrsfs}
 \RequirePackage{dsfont}
 \RequirePackage{mathtools}
-\RequirePackage[all,2cell,cmtip]{xy}
-\UseAllTwocells
 \RequirePackage{cancel}
 \RequirePackage{faktor}
 \RequirePackage{esint} % intégrales
 \RequirePackage{mathdots}  %points de matrices
 \usepackage{multirow}
 
-\DeclareOption*{}
+%% Déclaration des options
+
+\newif \if@eng \@engfalse
+\newif \if@thm \@thmfalse
+\newif \if@diag \@diagfalse
+
+\DeclareOption{anglais}{\@engtrue}
+\DeclareOption{theoremes}{\@thmtrue}
+\DeclareOption{diagrammes}{\@diagtrue}
+
 \ProcessOptions
+
+\if@thm
+	\if@eng
+	\Requirepackage[anglais]{theoremes}
+	\else
+	\RequirePackage{theoremes}
+	\fi
+\fi
+
+\if@diag
+	\RequirePackage{diagrammes}
+\fi
 
 %% Opérateurs
 
@@ -121,8 +145,8 @@
 	\newcommand{\ouqq}{\qquad\text{ou}\qquad}
 	\newcommand{\donc}{\quad\text{donc}\quad}
 	\newcommand{\avec}{\quad\text{avec}\quad}
-	\newcommand{\ie}{\text{\textit{i. e.}}\xspace}
-	\newcommand{\ieq}{\quad\text{\textit{i. e.}}\quad}
+	\newcommand{\ie}{\text{\textit{i.e.}}\xspace}
+	\newcommand{\ieq}{\quad\text{\textit{i.e.}}\quad}
 	\newcommand{\cad}{\quad\text{c'est-à-dire}\quad}
 	\newcommand{\cadq}{\qquad\text{c'est-à-dire}\qquad}
 
@@ -185,11 +209,6 @@
            & #4 & \longmapsto     & #5 
 \end{array}
 }}
-
-%Diagrammes catégories
-
-\newcommand{\xytext}[1]{\raisebox{0.2em}{\xymatrix{#1}}}
-
 
 % trucs pratiques
 

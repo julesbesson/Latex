@@ -1,0 +1,77 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% --- Package pour les diagrammes de Jules --- %
+% --- -> commandes personnalisées                --- %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{diagrammes}
+
+%% Packages
+
+\RequirePackage{tikz-cd}
+
+\DeclareOption*{}
+\ProcessOptions
+
+%%% COMMANDES
+
+%% Diagrammes dans du texte
+
+% Flèche dans un texte
+
+\newcommand{\fleche}[3][f]{
+	\begin{tikzcd}[/tikz/ampersand replacement=\&]
+		#2	\arrow[r, "#1"{above}]	\&	#3
+	\end{tikzcd}
+}
+
+%% Petits diagrammes
+
+% Définition d'un foncteur
+\newcommand{\foncteur}[9][F]{
+	\begin{tikzcd}[sep = tiny, /tikz/ampersand replacement=\&]
+		#1 :
+			\&	#2	\arrow[rrrrrrr]
+				\&\&\&\&\&\&\&	#3 \\
+			\&	#5	\arrow[ddddd, "#4"{left}, ""{name=A,right}]
+				\&\&\&\&\&\&\&	#6	\arrow[ddddd, "#7"{right}, ""{name=B,left}]
+		\\ \\ \\ \\ \\
+		\arrow[mapsto, from=A, to=B]
+			\&	#8
+				\&\&\&\&\&\&\&	#9
+	\end{tikzcd}
+}
+
+
+% Deux-cellule
+\newcommand{\deuxcell}[5][\eta]{
+	\begin{tikzcd}[column sep=large, /tikz/ampersand replacement=\&]
+		#2	\arrow[r, bend left=40, "#4"{name=U, above}]
+			\arrow[r, bend right=40, "#5"{name=D, below}]
+			\&	#3
+		\arrow[Rightarrow, from=U, to=D, shorten=0.5ex, "#1"{left}]
+	\end{tikzcd}
+}
+
+%% Gros diagrammes
+
+% Diagramme en serpent
+\newcommand{\serpent}[7][\delta]{
+	\begin{tikzcd}[/tikz/ampersand replacement=\&]
+		#2	\arrow[r]
+			\&	#3	\arrow[r]
+					\arrow[d,  phantom,  ""{coordinate,	name=Z}]
+				\&	#4	\arrow[dll,
+								"#1",
+								rounded corners,
+								to path={	--	([xshift=2ex]\tikztostart.east)
+											|-		(Z) [near end]\tikztonodes
+											-|		([xshift=-2ex]\tikztotarget.west)
+											--		(\tikztotarget)}]	\\
+		#5	\arrow[r]
+			\&	#6	\arrow[r]
+				\&	#7
+	\end{tikzcd}
+}
+
+\endinput
