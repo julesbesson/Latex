@@ -25,6 +25,25 @@
 	\end{tikzcd}
 }
 
+\newcommand{\doublefleche}[4]{
+	\begin{tikzcd}[/tikz/ampersand replacement=\&]
+		#1	\arrow[r, shift left, "#3"{above}]	\arrow[r, shift right, "#4"{below}]	\&	#2
+	\end{tikzcd}
+}
+
+\newcommand{\allerretour}[4]{
+	\begin{tikzcd}[/tikz/ampersand replacement=\&]
+		#1	\arrow[r, shift left, "#3"{above}]
+		\&	#2	\arrow[l, shift left, "#4"{below}]
+	\end{tikzcd}
+}
+
+\newcommand{\nat}[3][\alpha]{
+	\begin{tikzcd}[/tikz/ampersand replacement=\&]
+		#2	\arrow[Rightarrow, r, "#1"{above}]	\&	#3
+	\end{tikzcd}
+}
+
 %% Petits diagrammes
 
 % Définition d'un foncteur
@@ -34,20 +53,20 @@
 			\&	#2	\arrow[rrrrrrr]
 				\&\&\&\&\&\&\&	#3 \\
 			\&	#5	\arrow[ddddd, "#4"{left}, ""{name=A,right}]
-				\&\&\&\&\&\&\&	#6	\arrow[ddddd, "#7"{right}, ""{name=B,left}]
+				\&\&\&\&\&\&\&	#8	\arrow[ddddd, "#7"{right}, ""{name=B,left}]
 		\\ \\ \\ \\ \\
 		\arrow[mapsto, from=A, to=B]
-			\&	#8
+			\&	#6
 				\&\&\&\&\&\&\&	#9
 	\end{tikzcd}
 }
 
 
 % Deux-cellule
-\newcommand{\deuxcell}[5][\eta]{
+\newcommand{\deuxcell}[5][\alpha]{
 	\begin{tikzcd}[column sep=large, /tikz/ampersand replacement=\&]
-		#2	\arrow[r, bend left=40, "#4"{name=U, above}]
-			\arrow[r, bend right=40, "#5"{name=D, below}]
+		#2	\arrow[r, bend left=35, "#4"{name=U, above}]
+			\arrow[r, bend right=35, "#5"{name=D, below}]
 			\&	#3
 		\arrow[Rightarrow, from=U, to=D, shorten=0.5ex, "#1"{left}]
 	\end{tikzcd}

@@ -1,8 +1,10 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{article_perso}
-
+\RequirePackage{kvoptions}
 
 %% Déclaration des options
+
+\newif \if@marge \@margefalse
 
 \newif \if@eng \@engfalse
 
@@ -10,6 +12,7 @@
 \newif\if@thm \@thmfalse
 \newif\if@diag \@diagfalse
 
+\DeclareOption{marge}{\@margetrue}
 
 \DeclareOption{anglais}{\@engtrue}
 
@@ -41,23 +44,26 @@
 \setitemize[0]{label=$\bullet$}
 \setitemize[1]{label=-}
 
-\RequirePackage{graphicx} % je ne sais plus exactement
 
 % Réelles options
 
 \if@math
 	\if@thm
 		\if@eng
-			\Requirepackage[anglais]{theoremes}
+			\RequirePackage[anglais]{theoremes}
 		\else
-		\Requirepackage{theoremes}
+			\RequirePackage{theoremes}
 		\fi
 	\fi
 	\if@diag
-	\RequirePackage{diagrammes}
+		\RequirePackage{diagrammes}
 	\fi
 \fi
 
-%\pagestyle{headings}
+\if@marge
+	\RequirePackage[margin=2cm]{geometry}
+\fi
+
+\pagestyle{headings}
 \RequirePackage{caption}
 \DeclareCaptionFormat{sanslabel}{#3}%
