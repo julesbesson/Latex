@@ -5,14 +5,14 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{theoremes}
 
-\RequirePackage{mathematiques}
 \RequirePackage{latexsym}
 \RequirePackage{multido}
 \RequirePackage{framed}
 \RequirePackage[amsmath,thmmarks,hyperref,framed]{ntheorem}
+\RequirePackage[dvipsnames]{xcolor}
 
 \newif \if@eng \@engfalse
-\DeclareOption{anglais}{\@engtrue}
+\DeclareOption{english}{\@engtrue}
 \ProcessOptions
 
 \makeatletter
@@ -45,13 +45,6 @@
                             \newtheorem{theorem_#2}{#3}
                            }
 
-%% Création des couleurs
-
-\definecolor{Green}{RGB}{3,166,79}
-\definecolor{RedOrange}{RGB}{240,97,52}
-\definecolor{Peach}{RGB}{246,150,89}
-\definecolor{Orchid}{RGB}{175,113,175}
-
 %% Création des théorèmes
 \if@eng
 
@@ -62,11 +55,30 @@
 
 \newthm{thm}{Theorem}{RedOrange}{black}{nonumberbreak}{\normalfont}{:}
 \newthm{lemme}{Lemma}{purple}{black}{nonumberbreak}{\normalfont}{:}
-\newthm{lemm}{Lemma}{purple}{black}{emptybreak}{\normalfont}{:}
 \newthm{coro}{Corollary}{Peach}{black}{nonumberbreak}{\normalfont}{:}
 
 \newthm{enonc}{Statement}{Orchid}{black}{emptybreak}{\normalfont}{:}
 
+\setlength\theorempreskipamount{0pt}%
+\setlength\theorempostskipamount{-1pt}%
+\theoremstyle{emptybreak}
+\theoremsymbol{}
+\theorembodyfont{\normalfont}
+\theoremseparator{:}
+\makeatletter
+  \newenvironment{lem}[1][]{%
+    \def\FrameCommand{{\color{purple}\vrule width 1pt}\hspace{6pt}}
+    \MakeFramed{\advance\hsize-\width \FrameRestore}
+    \kern0ex % pour la barre de gauche
+    \ifcat$\detokenize{#1}$
+      \begin{theorem_lem}%
+    \else 
+      \begin{theorem_lem}[\text{\bfseries\scshape #1}]%
+    \fi}%
+  {\end{theorem_lem}\endMakeFramed}
+\makeatother
+\theoremheaderfont{\bfseries\scshape\color{black}} 
+\newtheorem{theorem_lem}{Lemma}
 
 \theoremprework{%
 \setlength\theorempreskipamount{\topsep}\setlength\theorempostskipamount{\topsep}
@@ -75,7 +87,7 @@
 
 \theoremheaderfont{\bfseries \itshape}
 \theoremseparator{:}
-\newtheorem*{nb}{NB}
+\newtheorem*{Not}{Notation}
 
 \theoremheaderfont{\bfseries}
 \theoremprework{%
@@ -115,11 +127,30 @@
 
 \newthm{thm}{Th\'eor\`eme}{RedOrange}{black}{nonumberbreak}{\normalfont}{:}
 \newthm{lemme}{Lemme}{purple}{black}{nonumberbreak}{\normalfont}{:}
-\newthm{lemm}{Lemme}{purple}{black}{emptybreak}{\normalfont}{:}
 \newthm{coro}{Corollaire}{Peach}{black}{nonumberbreak}{\normalfont}{:}
 
 \newthm{enonc}{\'Enonc\'e}{Orchid}{black}{emptybreak}{\normalfont}{:}
 
+\setlength\theorempreskipamount{0pt}%
+\setlength\theorempostskipamount{-1pt}%
+\theoremstyle{emptybreak}
+\theoremsymbol{}
+\theorembodyfont{\normalfont}
+\theoremseparator{:}
+\makeatletter
+  \newenvironment{lem}[1][]{%
+    \def\FrameCommand{{\color{purple}\vrule width 1pt}\hspace{6pt}}
+    \MakeFramed{\advance\hsize-\width \FrameRestore}
+    \kern0ex % pour la barre de gauche
+    \ifcat$\detokenize{#1}$
+      \begin{theorem_lem}%
+    \else 
+      \begin{theorem_lem}[\text{\bfseries\scshape #1}]%
+    \fi}%
+  {\end{theorem_lem}\endMakeFramed}
+\makeatother
+\theoremheaderfont{\bfseries\scshape\color{black}} 
+\newtheorem{theorem_lem}{Lemma}
 
 \theoremstyle{plain}% default
 
@@ -129,7 +160,7 @@
 
 \theoremheaderfont{\bfseries \itshape}
 \theoremseparator{:}
-\newtheorem*{nb}{NB}
+\newtheorem*{Not}{Notation}
 
 \theoremheaderfont{\bfseries}
 \theoremprework{%

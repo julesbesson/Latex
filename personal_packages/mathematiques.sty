@@ -23,30 +23,31 @@
 \RequirePackage{faktor}
 \RequirePackage{esint} % intégrales
 \RequirePackage{mathdots}  %points de matrices
-\usepackage{multirow}
+\RequirePackage{multirow}
 
 %% Déclaration des options
 
-\newif \if@eng \@engfalse
 \newif \if@thm \@thmfalse
 \newif \if@diag \@diagfalse
+\newif \if@dess \@dessfalse
 
-\DeclareOption{anglais}{\@engtrue}
+\DeclareOption{english}{\PassOptionsToPackage{\CurrentOption}{theoremes}}
 \DeclareOption{theoremes}{\@thmtrue}
 \DeclareOption{diagrammes}{\@diagtrue}
+\DeclareOption{dessin}{\@desstrue}
 
 \ProcessOptions
 
 \if@thm
-	\if@eng
-	\Requirepackage[anglais]{theoremes}
-	\else
 	\RequirePackage{theoremes}
-	\fi
 \fi
 
 \if@diag
 	\RequirePackage{diagrammes}
+\fi
+
+\if@dess
+	\RequirePackage{tikz}
 \fi
 
 %% Opérateurs
@@ -60,12 +61,14 @@
 \DeclareMathOperator{\SL}{SL}
 \DeclareMathOperator{\car}{car}
 \DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\Conv}{Conv}
 
 %Morphismes 
 
 \DeclareMathOperator{\rg}{rg}
 \DeclareMathOperator{\im}{Im}
 \DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\ev}{\bf{}ev}
 
 %Catégories
 
@@ -73,6 +76,7 @@
 \DeclareMathOperator{\Hom}{Hom}
 \DeclareMathOperator{\dom}{dom}
 \DeclareMathOperator{\cod}{cod}
+\DeclareMathOperator{\colim}{colim}
 \DeclareMathOperator{\Mat}{\bf{}Mat}
 \DeclareMathOperator{\Grp}{\bf{}Grp}
 \DeclareMathOperator{\Set}{\bf{}Set}
@@ -85,16 +89,25 @@
 \DeclareMathOperator{\Ab}{\bf{}Ab}
 \DeclareMathOperator{\Ass}{\bf{}Ass}
 \DeclareMathOperator{\Lie}{\bf{}Lie}
+\DeclareMathOperator{\Mod}{\bf{}Mod}
+\DeclareMathOperator{\Bimod}{\bf{}Bimod}
 \DeclareMathOperator{\y}{\bf{}y}
 \DeclareMathOperator{\Fun}{Fun}
-
-
-
+\DeclareMathOperator{\Nat}{Nat}
+\DeclareMathOperator{\Ch}{\bf{}Ch}
+\DeclareMathOperator{\Sub}{\bf{Sub}}
+\DeclareMathOperator{\eq}{eq}
+\DeclareMathOperator{\coeq}{coeq}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\coIm}{coIm}
+\DeclareMathOperator{\Proj}{Proj}
+\DeclareMathOperator{\Inj}{Inj}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Tor}{Tor}
 
 % Espaces
 
 \DeclareMathOperator{\Ld}{L}
-
 
 %% commandes
 	
@@ -112,9 +125,11 @@
 		\newcommand{\Fonctions}[2]{\ensuremath{\mathcal{F} \left( #1 , #2 \right)}} % espaces de fonctions
 	
 		\newcommand{\Ens}[2]{\ensuremath{ \left\{ #1 \middle| #2 \right\} }}
+
+		\newcommand{\brackets}[2][1]{\llbracket #1, #2 \rrbracket}
 	
 	
-	 % définition d'ensembles
+	 % Commandes pour les catégories
 		
 		\newcommand{\op}[1]{\ensuremath{#1^{\text{op}}}}		
 		
@@ -122,11 +137,15 @@
 		\newcommand{\Homo}[3][]{\Hom_{#1} \left( #2,#3 \right)} %homomorphismes
 	
 		\newcommand{\auto}[1]{\Aut \left( #1 \right)}
-
+		\newcommand{\Tens}[3][A]{\ensuremath{#2 \bigotimes\limits_{#1} #3}}
+		\newcommand{\tens}[3][A]{\ensuremath{#2 \underset{#1}{\otimes} #3}}
+		\newcommand{\chain}[1][\Ca]{\ensuremath{\Ch_\bullet \left( #1 \right)}}
+		\newcommand{\cochain}[1][\Ca]{\ensuremath{\Ch^\bullet \left( #1 \right)}}
 
 	% commandes d'opérations
 	
 	\newcommand{\croch}[3]{\ensuremath{\left[ #1 \right]_{#2}^{#3}}}
+	\newcommand{\abs}[1]{\ensuremath{\left| #1 \right|}}
 	
 	% commandes de symboles
 	
@@ -171,9 +190,12 @@
 \def\Exp{\calligraphie{E}}
 \def\Poi{\calligraphie{P}}
 \def\Bin{\calligraphie{B}}
+\def\Co{\calligraphie{C}}
+\def\Kc{\ensuremath{\calligraphie{K}}}
 
+\def\A{\cursive{A}}
 \def\Ba{\cursive{B}}
-\def\Co{\cursive{C}}
+\def\Ca{\cursive{C}}
 \def\D{\cursive{D}}
 \def\E{\cursive{E}}
 \def\I{\cursive{I}}
@@ -184,6 +206,11 @@
 \def\Sym{\goth{S}}
 \def\Faisc{\goth{F}}
 \def\Ifrak{\goth{I}}
+
+\def\DELTA{\ensuremath{\mathbf{\Delta}}}
+\def\ch{\ensuremath{\mathbf{ch_+}}}
+\def\ssi{\ensuremath{\mathit{ssi}}}
+\def\score{\ensuremath{\textbf{-}}}
 
 	% Familles et suites
 	

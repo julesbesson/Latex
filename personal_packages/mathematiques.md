@@ -80,7 +80,7 @@ Commande | Résultat
 \dom | dom
 \cod | cod
 \op{1} | $1^{\text{op}}$
-\Co | \scr{C}
+\Ca | \scr{C}
 \D | \scr{D}
 \E | \scr{E}
 \Cat | **Cat**
