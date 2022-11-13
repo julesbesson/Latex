@@ -104,6 +104,18 @@
 
 %% Gros diagrammes
 
+% Suite exacte courte
+
+\newcommand{\ses}[3]{
+	\begin{tikzcd}[/tikz/ampersand replacement=\&]
+		0	\arrow[r]
+			\&	{#1}	\arrow[r]
+				\&	{#2}	\arrow[r]
+					\&	{#3}	\arrow[r]
+						\&	0
+	\end{tikzcd}
+}
+
 % Diagramme en serpent
 \newcommand{\serpent}[7][\delta]{
 	\begin{tikzcd}[/tikz/ampersand replacement=\&]
