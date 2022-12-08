@@ -5,6 +5,7 @@
 
 \newif\if@math \@mathfalse
 
+\DeclareOption{french}{	\PassOptionsToPackage{\CurrentOption}{babel}}
 \DeclareOption{english}{	\PassOptionsToPackage{\CurrentOption}{babel}
 							\PassOptionsToPackage{\CurrentOption}{mathematiques}}
 
@@ -22,7 +23,7 @@
 \LoadClass[a4paper,10pt]{article}
 
 %% Langues
-\RequirePackage[french]{babel}
+\RequirePackage{babel}
 
 %% Chargement des extensions
 

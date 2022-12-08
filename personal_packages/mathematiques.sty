@@ -27,6 +27,7 @@
 
 %% Déclaration des options
 
+\newif \if@eng \@engfalse
 \newif \if@thm \@thmfalse
 \newif \if@diag \@diagfalse
 \newif \if@dess \@dessfalse
@@ -48,202 +49,283 @@
 
 \if@dess
 	\RequirePackage{tikz}
-	\usetikzlibrary{shapes.geometric,intersections,through,calc}
+	\usetikzlibrary{shapes.geometric,intersections,through,calc,arrows,bending}
 \fi
 
-%% Opérateurs
-
-\DeclareMathOperator{\dd}{d}
-\DeclareMathOperator*{\infe}{inf}
-\DeclareMathOperator{\pgcd}{pgcd}
-\DeclareMathOperator{\ppcm}{ppcm}
-\DeclareMathOperator{\GL}{GL}
-\DeclareMathOperator{\comat}{comat}
-\DeclareMathOperator{\SL}{SL}
-\DeclareMathOperator{\car}{car}
-\DeclareMathOperator{\diag}{diag}
-\DeclareMathOperator{\Conv}{Conv}
-
-%Morphismes 
-
-\DeclareMathOperator{\rg}{rg}
-\DeclareMathOperator{\im}{Im}
-\DeclareMathOperator{\id}{id}
-\DeclareMathOperator{\ev}{\bf{}ev}
-
-%Catégories
-
-\DeclareMathOperator{\Ob}{Ob}
-\DeclareMathOperator{\Hom}{Hom}
-\DeclareMathOperator{\dom}{dom}
-\DeclareMathOperator{\cod}{cod}
-\DeclareMathOperator{\colim}{colim}
-\DeclareMathOperator{\Mat}{\bf{}Mat}
-\DeclareMathOperator{\Grp}{\bf{}Grp}
-\DeclareMathOperator{\Set}{\bf{}Set}
-\DeclareMathOperator{\Ring}{\bf{}Ring}
-\DeclareMathOperator{\Top}{\bf{}Top}
-\DeclareMathOperator{\Vect}{\bf{}Vect}
-\DeclareMathOperator{\Bbold}{\bf{}B}
-\DeclareMathOperator{\Htpy}{\bf{}Htpy}
-\DeclareMathOperator{\Cat}{\bf{}Cat}
-\DeclareMathOperator{\Ab}{\bf{}Ab}
-\DeclareMathOperator{\Ass}{\bf{}Ass}
-\DeclareMathOperator{\Lie}{\bf{}Lie}
-\DeclareMathOperator{\Mod}{\bf{}Mod}
-\DeclareMathOperator{\Bimod}{\bf{}Bimod}
-\DeclareMathOperator{\y}{\bf{}y}
-\DeclareMathOperator{\Fun}{Fun}
-\DeclareMathOperator{\Nat}{Nat}
-\DeclareMathOperator{\Ch}{\bf{}Ch}
-\DeclareMathOperator{\Sub}{\bf{Sub}}
-\DeclareMathOperator{\eq}{eq}
-\DeclareMathOperator{\coeq}{coeq}
-\DeclareMathOperator{\coker}{coker}
-\DeclareMathOperator{\coIm}{coIm}
-\DeclareMathOperator{\Proj}{Proj}
-\DeclareMathOperator{\Inj}{Inj}
-\DeclareMathOperator{\Ext}{Ext}
-\DeclareMathOperator{\Tor}{Tor}
-\DeclareMathOperator{\ab}{Ab}
-
-% Espaces
-
-\DeclareMathOperator{\Ld}{L}
-
-%% commandes
+% Commandes d'ensembles.
 	
-	\newcommand{\ensemble}[1]{\ensuremath{\mathbb{#1}}\xspace}
-	\newcommand{\calligraphie}[1]{\ensuremath{\mathcal{#1}}\xspace}
-	\newcommand{\cursive}[1]{\ensuremath{\mathscr{#1}}\xspace}
-	\newcommand{\goth}[1]{\ensuremath{\mathfrak{#1}}\xspace}
-	
-	% commandes d'ensembles
-		
-	\DeclareMathOperator\vect{Vect}		
-		
-		\newcommand{\mat}[2]{\ensuremath{\mathcal{M}_{#1} \left( #2 \right)}} % matrices
-	
-		\newcommand{\Fonctions}[2]{\ensuremath{\mathcal{F} \left( #1 , #2 \right)}} % espaces de fonctions
-	
-		\newcommand{\Ens}[2]{\ensuremath{ \left\{ #1 \middle| #2 \right\} }}
+\newcommand{\ensemble}		[1]	{\ensuremath{\mathbb{#1}}\xspace}
+\newcommand{\calligraphie}	[1]	{\ensuremath{\mathcal{#1}}\xspace}
+\newcommand{\cursive}		[1]	{\ensuremath{\mathscr{#1}}\xspace}
+\newcommand{\goth}			[1]	{\ensuremath{\mathfrak{#1}}\xspace}
 
-		\newcommand{\brackets}[2][1]{\llbracket #1, #2 \rrbracket}
+
+% Mathématiques de base
+
+	%% Ensembles de base
+
+	\def\C{\ensemble{C}}	% Complexes
+	\def\N{\ensemble{N}}	% Entiers naturels
+	\def\Q{\ensemble{Q}}	% Rationnels
+	\def\R{\ensemble{R}}	% Réels
+	\def\Z{\ensemble{Z}}	% Entiers relatifs
+
+	%% Opérateurs
+
+	\DeclareMathOperator{\re}		{Re}	% Partie réelle
+
+	%% Définitions
+
+	\def\Part{\cursive{P}}	% Parties d'un ensemble
+
+	%% Commandes
+
+	\newcommand{\abs}		[1]		{\ensuremath{\left| #1 \right|}}						% Valeur absolue
+	\newcommand{\brackets}	[2][1]	{\ensuremath{\llbracket #1, #2 \rrbracket}}				% [|#1,#2|]
+	\newcommand{\Ens}		[2]		{\ensuremath{\left\{ #1 \middle| #2 \right\}}}			% Pour définir un ensemble: {#1|#2}
+	\newcommand{\Fonctions}	[2]		{\ensuremath{\calligraphie{F} \left( #1 , #2 \right)}}	% espaces de fonctions
+
+	%% Familles et suites
 	
+	\renewcommand{\fam}	[3]		{\ensuremath{ \left({ #1}_{#2} \right)_{#2 \in #3} }}	% Famille d'objets
+	\newcommand{\suite}	[2][\N]	{\ensuremath{ \fam{#2}{n}{#1} }}						% Suite
+
+	%% Fonctions
+
+	\newcommand{\fun}		[3]	{\ensuremath{
+		\begin{array}[t]{rrcl}
+			#1 : #2  \longrightarrow #3
+		\end{array}}}
+
+	\newcommand{\fonc}		[4]	{\ensuremath{
+		\begin{array}[t]{rcl}
+			#1 & \longrightarrow & #2\\
+			#3 & \longmapsto     & #4
+		\end{array}
+		}}
+
+	\newcommand{\fonction}	[5]	{\ensuremath{
+		\begin{array}[t]{rrcl}
+			#1 \, : & #2 & \longrightarrow & #3\\
+					& #4 & \longmapsto     & #5 
+		\end{array}}}
+
+
+% Algèbre
+
+	%% Algèbres de Lie
+
+	\def\gl		{\goth{gl}}	% Groupe de Lie linéaire
+	\def\Ifrak	{\goth{I}}	% Idéal de Lie
+	\def\sl		{\goth{sl}}	% Groupe de Lie spécial linéaire
+	\def\so		{\goth{so}}	% Groupe de Lie spécial orthogonal
+
+	%% Algèbre linéaire
+
+	\DeclareMathOperator{\car}		{car}	% Caractéristique
+	\DeclareMathOperator{\comat}	{comat}	% Comatrice
+	\DeclareMathOperator{\diag}		{diag}	% Matrice diagonale
+	\DeclareMathOperator{\GL}		{GL}	% Groupe linéaire
+	\DeclareMathOperator{\pr}		{pr}	% Projection
+	\DeclareMathOperator{\rg}		{rg}	% Rang
+	\DeclareMathOperator{\SL}		{SL}	% Groupes spécial linéaire
+	\DeclareMathOperator{\SO}		{SO}	% Groupes spécial orthogonal
+	\DeclareMathOperator{\Tr}		{Tr}	% Trace
+	\DeclareMathOperator{\vect}		{Vect}	% Espace vectoriel engendré
+
+	\def\L	{\calligraphie{L}}	% L des morphismes linéaires
+	\def\t	{{}^t \!}	% Transposée
+
+	\newcommand{\mat}	[2][n]	{\ensuremath{\calligraphie{M}_{#1} \left( #2 \right)}} % Matrices 
+
+	%% Arithmétique
+
+	\DeclareMathOperator{\pgcd}{pgcd}
+	\DeclareMathOperator{\ppcm}{ppcm}
+
+	%% Corps
+
+	\def\F{\ensemble{F}}	% Corps F
+	\def\K{\ensemble{K}}	% Corps K
+	\def\Lc{\ensemble{L}}	% Corps L
+
+	%% Géométrie affine
+
+	\DeclareMathOperator{\Conv}{Conv}	% Enveloppe convexe
+	\DeclareMathOperator{\Bary}{Bar}	% Barycentre
+
+	%% Groupes
+
+	\DeclareMathOperator{\ab}	{Ab}	% Abélianisé
+	\def\Alt{\goth{A}}		% Groupe alterné
+	\def\Sym{\goth{S}}		% Groupe symétrique
+
+	%% Morphismes
+
+	\DeclareMathOperator{\Aut}	{Aut}		% Automorphismes
+	\DeclareMathOperator{\ev}	{\bf{ev}}	% Morphisme d'évaluation
+	\DeclareMathOperator{\Hom}	{Hom}		% Homomorphismes
+	\DeclareMathOperator{\id}	{id}		% Identité
+	\DeclareMathOperator{\im}	{Im}		% Image
+
+	\newcommand{\inj}	{\lhook\joinrel\longrightarrow}		% Flèche pour injections
+	\newcommand{\surj}	{\relbar\joinrel\twoheadrightarrow}	% Flèche pour surjections
+
+
+% Analyse
+
+\DeclareMathOperator{\dd}		{d}		% d droit pour dx des intégrales
+\DeclareMathOperator*{\infe}	{inf}	% Infimum
+
+\newcommand{\bracket}	[3]	{\ensuremath{\left[ #1 \right]_{#2}^{#3}}}	% Crochets de primitive pour l'intégrale
+
+
+% Catégories
+
+	%% Constructions catégoriques
+
+	\DeclareMathOperator{\Bbold}	{\bf{}B}
+	\DeclareMathOperator{\Ch}		{\bf{}Ch}
+	\DeclareMathOperator{\coeq}		{coeq}
+	\DeclareMathOperator{\cod}		{cod}
+	\DeclareMathOperator{\coker}	{coker}
+	\DeclareMathOperator{\coIm}		{coIm}
+	\DeclareMathOperator{\colim}	{colim}
+	\DeclareMathOperator{\dom}		{dom}
+	\DeclareMathOperator{\eq}		{eq}
+	\DeclareMathOperator{\Ext}		{Ext}
+	\DeclareMathOperator{\Fun}		{Fun}
+	\DeclareMathOperator{\Inj}		{Inj}
+	\DeclareMathOperator{\map}		{map}
+	\DeclareMathOperator{\Nat}		{Nat}
+	\DeclareMathOperator{\Ob}		{Ob}
+	\DeclareMathOperator{\Proj}		{Proj}
+	\DeclareMathOperator{\Sub}		{\bf{Sub}}
+	\DeclareMathOperator{\Tor}		{Tor}
+	\DeclareMathOperator{\y}		{\bf{}y}
+
+
+	%% Catégories concrètes
+
+	\DeclareMathOperator{\Ab}		{\bf{}Ab}
+	\DeclareMathOperator{\Ass}		{\bf{}Ass}
+	\DeclareMathOperator{\Bimod}	{\bf{}Bimod}
+	\DeclareMathOperator{\Cat}		{\bf{}Cat}
+	\DeclareMathOperator{\ch}		{bf{}ch_+}
+	\DeclareMathOperator{\Grp}		{\bf{}Grp}
+	\DeclareMathOperator{\Htpy}		{\bf{}Htpy}
+	\DeclareMathOperator{\Lie}		{\bf{}Lie}
+	\DeclareMathOperator{\Mat}		{\bf{}Mat}
+	\DeclareMathOperator{\Mod}		{\bf{}Mod}
+	\DeclareMathOperator{\modu}		{\bf{}mod}
+	\DeclareMathOperator{\Ring}		{\bf{}Ring}
+	\DeclareMathOperator{\Set}		{\bf{}Set}
+	\DeclareMathOperator{\Top}		{\bf{}Top}
+	\DeclareMathOperator{\Vect}		{\bf{}Vect}
 	
-	 % Commandes pour les catégories
-		
-		\newcommand{\op}[1]{\ensuremath{#1^{\text{op}}}}		
-		
-		\newcommand{\homo}[3][]{\hom_{#1} \left( #2 , #3\right)}
-		\newcommand{\Homo}[3][]{\Hom_{#1} \left( #2,#3 \right)} %homomorphismes
+	\def\DELTA						{\ensuremath{\mathbf{\Delta}}}
+
+	%% Commandes pour les catégories
+
+	\newcommand{\Auto}		[1]			{\ensuremath{\Aut \left( #1 \right)}}			% Automotphismes
+	\newcommand{\homo}		[3][]		{\ensuremath{\hom_{#1} \left( #2 , #3\right)}}	% Morphismes dans une catégorie version minuscule
+	\newcommand{\Homo}		[3][]		{\ensuremath{\Hom_{#1} \left( #2,#3 \right)}}	% Morphismes dans une catégorie version majuscule
+	\newcommand{\op}		[1]			{\ensuremath{#1^{\text{op}}}}					% Catégorie opposée
+	\newcommand{\Tens}		[3][A]		{\ensuremath{#2 \bigotimes\limits_{#1} #3}}		% Gros produit tensoriel
+	\newcommand{\tens}		[3][A]		{\ensuremath{#2 \underset{#1}{\otimes} #3}}		% Produit tensoriel
+	\newcommand{\chain}		[1][\Ca]	{\ensuremath{\Ch_\bullet \left( #1 \right)}}	% Complexes de chaînes d'une catégorie abélienne
+	\newcommand{\cochain}	[1][\Ca]	{\ensuremath{\Ch^\bullet \left( #1 \right)}}	% Complexes de cochaînes d'une catégorie abélienne
 	
-		\newcommand{\auto}[1]{\Aut \left( #1 \right)}
-		\newcommand{\Tens}[3][A]{\ensuremath{#2 \bigotimes\limits_{#1} #3}}
-		\newcommand{\tens}[3][A]{\ensuremath{#2 \underset{#1}{\otimes} #3}}
-		\newcommand{\chain}[1][\Ca]{\ensuremath{\Ch_\bullet \left( #1 \right)}}
-		\newcommand{\cochain}[1][\Ca]{\ensuremath{\Ch^\bullet \left( #1 \right)}}
+	%% Faisceaux
 
-	% commandes d'opérations
+	\def\Faisc	{\goth{F}}			% Faisceau
+	\def\Oo		{\calligraphie{O}}	% O pour les faisceaux d'anneaux
+
+	%% Notations
+
+	\def\A	{\cursive{A}}		% A pour catégorie abélienne
+	\def\Ba	{\cursive{B}}		% B pour catégorie
+	\def\Ca	{\cursive{C}}		% C pour catégorie
+	\def\D	{\cursive{D}}		% D pour catégorie
+	\def\E	{\cursive{E}}		% E pour catégorie exacte
+	\def\I	{\cursive{I}}		% I pour diagrammes de catégories
+	\def\J	{\cursive{J}}		% J pour diagrammes de catégories
+	\def\T	{\calligraphie{T}}	% T calligraphié pour triangles
+
 	
-	\newcommand{\croch}[3]{\ensuremath{\left[ #1 \right]_{#2}^{#3}}}
-	\newcommand{\abs}[1]{\ensuremath{\left| #1 \right|}}
+% Logique
+
+\renewcommand{\iff}{\ensuremath{\if@display\quad\Longleftrightarrow\quad\else\Leftrightarrow\fi}}	% <==>
+\renewcommand{\implies}{\ensuremath{\if@display\quad\Longrightarrow\quad\else\Rightarrow\fi}}		% ==>
+
+\if@eng
+	\newcommand{\avec}	{\ensuremath{\quad\text{with}\quad}}
+	\newcommand{\donc}	{\ensuremath{\quad\text{hence}\quad}}
+	\newcommand{\et}	{\ensuremath{\text{ and }}}
+	\newcommand{\etq}	{\ensuremath{\quad\text{and}\quad}}
+	\newcommand{\etqq}	{\ensuremath{\qquad\text{and}\qquad}}
+	\newcommand{\ie}	{\ensuremath{\text{\textit{i.e.}}\xspace}}
+	\newcommand{\ieq}	{\ensuremath{\quad\text{\textit{i.e.}}\quad}}
+	\newcommand{\ou}	{\ensuremath{\text{ or }}}
+	\newcommand{\ouq}	{\ensuremath{\quad\text{or}\quad}}
+	\newcommand{\ouqq}	{\ensuremath{\qquad\text{or}\qquad}}
+	\newcommand{\pour}	{\ensuremath{\text{\textit{for}}\xspace}}
+	\newcommand{\pourq}	{\ensuremath{\quad\text{\textit{for}}\quad}}
+	\newcommand{\ssi}	{\ensuremath{\mathit{iff}}}
+	\newcommand{\tq}	{\ensuremath{\text{ st }}}
+	\newcommand{\tqq}	{\ensuremath{\quad\text{st}\quad}}
+\else
+	\newcommand{\avec}	{\ensuremath{\quad\text{avec}\quad}}
+	\newcommand{\donc}	{\ensuremath{\quad\text{donc}\quad}}
+	\newcommand{\et}	{\ensuremath{\text{ et }}}
+	\newcommand{\etq}	{\ensuremath{\quad\text{et}\quad}}
+	\newcommand{\etqq}	{\ensuremath{\qquad\text{et}\qquad}}
+	\newcommand{\ie}	{\ensuremath{\text{\textit{i.e.}}\xspace}}
+	\newcommand{\ieq}	{\ensuremath{\quad\text{\textit{i.e.}}\quad}}
+	\newcommand{\ou}	{\ensuremath{\text{ ou }}}
+	\newcommand{\ouq}	{\ensuremath{\quad\text{ou}\quad}}
+	\newcommand{\ouqq}	{\ensuremath{\qquad\text{ou}\qquad}}
+	\newcommand{\pour}	{\ensuremath{\text{\textit{pour}}\xspace}}
+	\newcommand{\pourq}	{\ensuremath{\quad\text{\textit{pour}}\quad}}
+	\newcommand{\ssi}	{\ensuremath{\mathit{ssi}}}
+	\newcommand{\tq}	{\ensuremath{\text{ tq }}}
+	\newcommand{\tqq}	{\ensuremath{\quad\text{tq}\quad}}
+\fi
+
+
+% Probabilités
+
+\def\Bin{\calligraphie{B}}	% Loi binomiale
+\def\Esp{\ensemble{E}}		% Espérance
+\def\Exp{\calligraphie{E}}	% Loi exponentielle
+\def\P{\ensemble{P}}		% Probabilité
+\def\Poi{\calligraphie{P}}	% Loi de Poisson
+
+
+% Topologie
 	
-	% commandes de symboles
-	
-	\renewcommand{\iff}{\if@display\quad\Longleftrightarrow\quad\else\Leftrightarrow\fi}
-	\renewcommand{\implies}{\if@display\quad\Longrightarrow\quad\else\Rightarrow\fi}
-	
-	\newcommand{\inj}{\lhook\joinrel\longrightarrow}  % injections
-	\newcommand{\surj}{\relbar\joinrel\twoheadrightarrow} % surjections
-	
-	%% Connecteurs logiques
-	\newcommand{\et}{\text{ et }}
-	\newcommand{\etq}{\quad\text{et}\quad}
-	\newcommand{\etqq}{\qquad\text{et}\qquad}
-	\newcommand{\ou}{\text{ ou }}
-	\newcommand{\ouq}{\quad\text{ou}\quad}
-	\newcommand{\ouqq}{\qquad\text{ou}\qquad}
-	\newcommand{\donc}{\quad\text{donc}\quad}
-	\newcommand{\avec}{\quad\text{avec}\quad}
-	\newcommand{\ie}{\text{\textit{i.e.}}\xspace}
-	\newcommand{\ieq}{\quad\text{\textit{i.e.}}\quad}
-	\newcommand{\cad}{\quad\text{c'est-à-dire}\quad}
-	\newcommand{\cadq}{\qquad\text{c'est-à-dire}\qquad}
+	%% Opérateurs
 
-%% Définitions
+	\DeclareMathOperator{\adh}	{adh}	% Adhérence d'un ensemble
+	\DeclareMathOperator{\ins}	{int}	% Intérieur d'un ensemble
+	\DeclareMathOperator{\Ld}	{L}		% L de l'espace quotienté des fonctions intégrables
 
-	%% ensembles
+	%% Définitions
 
-%ensembles classiques
+	\def\Co	{\calligraphie{C}}	% C des fonctions continues
+	\def\Di	{\ensemble{D}}		% Disque
+	\def\O	{\cursive{O}}		% O pour ouverts standards de la topologie compact-ouvert
+	\def\S	{\ensemble{S}}		% Sphère
+	\def\U	{\calligraphie{U}}	% U pour recouvrement d'ouverts
 
-\def\R{\ensemble{R}}
-\def\C{\ensemble{C}}
-\def\K{\ensemble{K}}
-\def\Q{\ensemble{Q}}
-\def\N{\ensemble{N}}
-\def\Z{\ensemble{Z}}
-\def\Lc{\ensemble{L}}
-\def\F{\ensemble{F}}
-\def\Esp{\ensemble{E}}
-\def\S{\ensemble{S}}
-\def\P{\ensemble{P}}
+	%% Commandes
 
-\def\T{\calligraphie{T}}
-\def\L{\calligraphie{L}}
-\def\Exp{\calligraphie{E}}
-\def\Poi{\calligraphie{P}}
-\def\Bin{\calligraphie{B}}
-\def\Co{\calligraphie{C}}
-\def\Kc{\ensuremath{\calligraphie{K}}}
+	\newcommand{\norm}	[2][]	{\ensuremath{\left\| #2 \right\|_{#1}}}	% Norme
 
-\def\A{\cursive{A}}
-\def\Ba{\cursive{B}}
-\def\Ca{\cursive{C}}
-\def\D{\cursive{D}}
-\def\E{\cursive{E}}
-\def\I{\cursive{I}}
-\def\J{\cursive{J}}
-\def\Part{\cursive{P}}
 
-\def\Alt{\goth{A}}
-\def\Sym{\goth{S}}
-\def\Faisc{\goth{F}}
-\def\Ifrak{\goth{I}}
+% Ajouts
 
-\def\DELTA{\ensuremath{\mathbf{\Delta}}}
-\def\ch{\ensuremath{\mathbf{ch_+}}}
-\def\ssi{\ensuremath{\mathit{ssi}}}
 \def\score{\ensuremath{\textbf{-}}}
 
-	% Familles et suites
-	
-		\renewcommand{\fam}[3]{\ensuremath{ \left({ #1}_{#2} \right)_{#2 \in #3} }}
-		\newcommand{\suite}[2][\N]{\ensuremath{ \fam{#2}{n}{#1} }}
-
-%% Fonctions
-
-\newcommand{\fun}[3]{\ensuremath{\begin{array}{rrcl}
-#1 : #2  \longrightarrow #3
-\end{array}}}
-
-\newcommand{\fonc}[4]{\ensuremath{
-\begin{array}{rcl}
-#1 & \longrightarrow & #2\\
-#3 & \longmapsto     & #4
-\end{array}
-}}
-
-\newcommand{\fonction}[5]{\ensuremath{
-\begin{array}[t]{rrcl}
-#1 \, : & #2 & \longrightarrow & #3\\
-           & #4 & \longmapsto     & #5 
-\end{array}
-}}
-
-% trucs pratiques
-
-\DeclareMathOperator{\Tr}{Tr}
-\def\t{{}^t \!}   % Pour la transposée
 
 \endinput

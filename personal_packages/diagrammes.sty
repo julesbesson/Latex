@@ -13,12 +13,23 @@
 \DeclareOption*{}
 \ProcessOptions
 
+%%% Belles flèches
+\tikzcdset{arrow style=tikz, diagrams={>={Stealth[round,length=4pt,width=4.95pt,inset=2.75pt]}}}
+
 %%% COMMANDES
+% Faire des points au début d'une flèche
+\def\releve{\ensuremath{\raisebox{-0.5pt}{\footnotesize\dots}}}
+\tikzset{ points/.tip={Glyph[glyph math command=releve, glyph length=13pt, glyph axis=0pt]},
+}
+
+\newcommand{\arrowIn}{
+\tikz \draw[-stealth] (-1pt,0) -- (1pt,0);
+}
 
 %% Diagrammes dans du texte
 
 % Flèche
-\newcommand{\fleche}[3][f]{
+\newcommand{\fleche}[3][]{
 	\begin{tikzcd}[/tikz/ampersand replacement=\&]
 		{#2}	\arrow[r, "{#1}"{above}]	\&	{#3}
 	\end{tikzcd}
@@ -45,7 +56,7 @@
 }
 
 % Transformation naturelle
-\newcommand{\nat}[3][\alpha]{
+\newcommand{\nat}[3][]{
 	\begin{tikzcd}[/tikz/ampersand replacement=\&]
 		{#2}	\arrow[Rightarrow, r, "{#1}"{above}]	\&	{#3}
 	\end{tikzcd}

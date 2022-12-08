@@ -15,6 +15,37 @@
 \DeclareOption{english}{\@engtrue}
 \ProcessOptions
 
+%% Création des théorèmes
+\if@eng
+	\def\defname{Definition}
+	\def\defpropname{Definition-Proposition}
+	\def\propname{Proposition}
+	\def\coropropname{Corollary}
+	\def\thmname{Theorem}
+	\def\lemname{Lemma}
+	\def\coroname{Corollary}
+	\def\statname{Statement}
+	\def\notname{notation}
+	\def\remname{remark}
+	\def\idname{idea}
+	\def\exname{example}
+	\def\prfname{proof}
+\else
+	\def\defname{D\'efinition}
+	\def\defpropname{D\'efinition-Proposition}
+	\def\propname{Proposition}
+	\def\coropropname{Corollaire}
+	\def\thmname{Th\'eoreme}
+	\def\lemname{Lemme}
+	\def\coroname{Corollaire}
+	\def\statname{\'Enonc\'e}
+	\def\notname{notation}
+	\def\remname{remarque}
+	\def\idname{id\'ee}
+	\def\exname{exemple}
+	\def\prfname{preuve}
+\fi
+
 \makeatletter
 \let\@@magyar@captionfix\relax
 %\let\th@plain\relax
@@ -45,40 +76,16 @@
                             \newtheorem{theorem_#2}{#3}
                            }
 
-%% Création des théorèmes
-\if@eng
+\newthm{definition}{\defname}{Green}{black}{nonumberbreak}{\normalfont}{:}
+\newthm{defprop}{\defpropname}{Green}{black}{nonumberbreak}{\normalfont}{:}
+\newthm{proposition}{\propname}{teal}{black}{nonumberbreak}{\normalfont}{:}
+\newthm{coroprop}{\coropropname}{cyan}{black}{nonumberbreak}{\normalfont}{:}
 
-\newthm{defi}{Definition}{Green}{black}{nonumberbreak}{\normalfont}{:}
-\newthm{defprop}{Definition-Proposition}{Green}{black}{nonumberbreak}{\normalfont}{:}
-\newthm{prop}{Property}{teal}{black}{nonumberbreak}{\normalfont}{:}
-\newthm{corol}{Corollary}{cyan}{black}{break}{\normalfont}{:}
+\newthm{theorem}{\thmname}{RedOrange}{black}{nonumberbreak}{\normalfont}{:}
+\newthm{lemma}{\lemname}{purple}{black}{nonumberbreak}{\normalfont}{:}
+\newthm{corollary}{\coroname}{Peach}{black}{nonumberbreak}{\normalfont}{:}
 
-\newthm{thm}{Theorem}{RedOrange}{black}{nonumberbreak}{\normalfont}{:}
-\newthm{lemme}{Lemma}{purple}{black}{nonumberbreak}{\normalfont}{:}
-\newthm{coro}{Corollary}{Peach}{black}{nonumberbreak}{\normalfont}{:}
-
-\newthm{enonc}{Statement}{Orchid}{black}{emptybreak}{\normalfont}{:}
-
-\setlength\theorempreskipamount{0pt}%
-\setlength\theorempostskipamount{-1pt}%
-\theoremstyle{emptybreak}
-\theoremsymbol{}
-\theorembodyfont{\normalfont}
-\theoremseparator{:}
-\makeatletter
-  \newenvironment{lem}[1][]{%
-    \def\FrameCommand{{\color{purple}\vrule width 1pt}\hspace{6pt}}
-    \MakeFramed{\advance\hsize-\width \FrameRestore}
-    \kern0ex % pour la barre de gauche
-    \ifcat$\detokenize{#1}$
-      \begin{theorem_lem}%
-    \else 
-      \begin{theorem_lem}[\text{\bfseries\scshape #1}]%
-    \fi}%
-  {\end{theorem_lem}\endMakeFramed}
-\makeatother
-\theoremheaderfont{\bfseries\scshape\color{black}} 
-\newtheorem{theorem_lem}{Lemma}
+\newthm{statement}{\statname}{Orchid}{black}{emptybreak}{\normalfont}{:}
 
 \theoremprework{%
 \setlength\theorempreskipamount{\topsep}\setlength\theorempostskipamount{\topsep}
@@ -87,27 +94,27 @@
 
 \theoremheaderfont{\bfseries \itshape}
 \theoremseparator{:}
-\newtheorem*{Not}{Notation}
+\newtheorem*{notation}{\notname}
 
 \theoremheaderfont{\bfseries}
 \theoremprework{%
 \setlength\theorempreskipamount{\topsep}\setlength\theorempostskipamount{\topsep}
 }
-\newtheorem*{Rq}{Remark}
+\newtheorem*{remark}{\remname}
 
 \theoremheaderfont{\itshape}
 
 \theoremprework{%
 \setlength\theorempreskipamount{\topsep}\setlength\theorempostskipamount{\topsep}
 }
-\newtheorem*{Idee}{Idea}
+\newtheorem*{idea}{\idname}
 
 \theoremheaderfont{\normalfont}
 
 \theoremprework{%
 \setlength\theorempreskipamount{\topsep}\setlength\theorempostskipamount{\topsep}
 }
-\newtheorem*{ex}{Example}
+\newtheorem*{example}{\underline{\exname}}
 
 
 \theoremsymbol{$\square$}
@@ -116,81 +123,4 @@
 \setlength\theorempreskipamount{\topsep}\setlength\theorempostskipamount{\topsep}
 }
 \theoremheaderfont{\bfseries\itshape}
-\newtheorem*{prv}{Proof}
-
-\else
-
-\newthm{defi}{D\'efinition}{Green}{black}{nonumberbreak}{\normalfont}{:}
-\newthm{defprop}{D\'efinition-Proposition}{Green}{black}{nonumberbreak}{\normalfont}{:}
-\newthm{prop}{Propri\'et\'e}{teal}{black}{nonumberbreak}{\normalfont}{:}
-\newthm{corol}{Corollaire}{cyan}{black}{break}{\normalfont}{:}
-
-\newthm{thm}{Th\'eor\`eme}{RedOrange}{black}{nonumberbreak}{\normalfont}{:}
-\newthm{lemme}{Lemme}{purple}{black}{nonumberbreak}{\normalfont}{:}
-\newthm{coro}{Corollaire}{Peach}{black}{nonumberbreak}{\normalfont}{:}
-
-\newthm{enonc}{\'Enonc\'e}{Orchid}{black}{emptybreak}{\normalfont}{:}
-
-\setlength\theorempreskipamount{0pt}%
-\setlength\theorempostskipamount{-1pt}%
-\theoremstyle{emptybreak}
-\theoremsymbol{}
-\theorembodyfont{\normalfont}
-\theoremseparator{:}
-\makeatletter
-  \newenvironment{lem}[1][]{%
-    \def\FrameCommand{{\color{purple}\vrule width 1pt}\hspace{6pt}}
-    \MakeFramed{\advance\hsize-\width \FrameRestore}
-    \kern0ex % pour la barre de gauche
-    \ifcat$\detokenize{#1}$
-      \begin{theorem_lem}%
-    \else 
-      \begin{theorem_lem}[\text{\bfseries\scshape #1}]%
-    \fi}%
-  {\end{theorem_lem}\endMakeFramed}
-\makeatother
-\theoremheaderfont{\bfseries\scshape\color{black}} 
-\newtheorem{theorem_lem}{Lemma}
-
-\theoremstyle{plain}% default
-
-\theoremprework{%
-\setlength\theorempreskipamount{\topsep}\setlength\theorempostskipamount{\topsep}
-}
-
-\theoremheaderfont{\bfseries \itshape}
-\theoremseparator{:}
-\newtheorem*{Not}{Notation}
-
-\theoremheaderfont{\bfseries}
-\theoremprework{%
-\setlength\theorempreskipamount{\topsep}\setlength\theorempostskipamount{\topsep}
-}
-\newtheorem*{Rq}{Remarque}
-
-\theoremheaderfont{\itshape}
-
-\theoremprework{%
-\setlength\theorempreskipamount{\topsep}\setlength\theorempostskipamount{\topsep}
-}
-\newtheorem*{Idee}{Idée}
-
-\theoremheaderfont{\normalfont}
-
-\theoremprework{%
-\setlength\theorempreskipamount{\topsep}\setlength\theorempostskipamount{\topsep}
-}
-\newtheorem*{ex}{Exemple}
-
-
-\theoremsymbol{$\square$}
-
-\theoremprework{%
-\setlength\theorempreskipamount{\topsep}\setlength\theorempostskipamount{\topsep}
-}
-\theoremheaderfont{\bfseries\itshape}
-\newtheorem*{prv}{Preuve}
-
-\fi
-
-\endinput
+\newtheorem*{proof}{\prfname}

@@ -7,7 +7,8 @@
 
 \DeclareOption{oneside}{\PassOptionsToClass{\CurrentOption}{book}}
 
-\DeclareOption{english}{	\PassOptionsToPackage{\CurrentOption}{babel}
+\DeclareOption{french}{	\PassOptionsToPackage{\CurrentOption}{babel}}
+\DeclareOption{english}{	\PassOptionsToPackage{\CurrentOption, french, main = english}{babel}
 							\PassOptionsToPackage{\CurrentOption}{mathematiques}}
 
 \DeclareOption{mathematiques}{\@mathtrue}
@@ -25,7 +26,7 @@
 
 
 %% Langues
-\RequirePackage[french]{babel}
+\RequirePackage{babel}
 
 %% Chargement des extensions
 
