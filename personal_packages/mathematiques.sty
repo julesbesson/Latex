@@ -32,7 +32,7 @@
 \newif \if@diag \@diagfalse
 \newif \if@dess \@dessfalse
 
-\DeclareOption{english}{\PassOptionsToPackage{\CurrentOption}{theoremes}}
+\DeclareOption{english}{\PassOptionsToPackage{\CurrentOption}{theoremes} \@engtrue}
 \DeclareOption{theoremes}{\@thmtrue}
 \DeclareOption{diagrammes}{\@diagtrue}
 \DeclareOption{dessin}{\@desstrue}
@@ -54,10 +54,10 @@
 
 % Commandes d'ensembles.
 	
-\newcommand{\ensemble}		[1]	{\ensuremath{\mathbb{#1}}\xspace}
-\newcommand{\calligraphie}	[1]	{\ensuremath{\mathcal{#1}}\xspace}
-\newcommand{\cursive}		[1]	{\ensuremath{\mathscr{#1}}\xspace}
-\newcommand{\goth}			[1]	{\ensuremath{\mathfrak{#1}}\xspace}
+\newcommand{\ensemble}		[1]	{\ensuremath{\mathbb{#1}}}
+\newcommand{\calligraphie}	[1]	{\ensuremath{\mathcal{#1}}}
+\newcommand{\cursive}		[1]	{\ensuremath{\mathscr{#1}}}
+\newcommand{\goth}			[1]	{\ensuremath{\mathfrak{#1}}}
 
 
 % Mathématiques de base
@@ -174,7 +174,7 @@
 
 % Analyse
 
-\DeclareMathOperator{\dd}		{d}		% d droit pour dx des intégrales
+\DeclareMathOperator{\dd}		{d\!}		% d droit pour dx des intégrales
 \DeclareMathOperator*{\infe}	{inf}	% Infimum
 
 \newcommand{\bracket}	[3]	{\ensuremath{\left[ #1 \right]_{#2}^{#3}}}	% Crochets de primitive pour l'intégrale
@@ -200,6 +200,7 @@
 	\DeclareMathOperator{\Nat}		{Nat}
 	\DeclareMathOperator{\Ob}		{Ob}
 	\DeclareMathOperator{\Proj}		{Proj}
+	\DeclareMathOperator{\Pd}		{P}
 	\DeclareMathOperator{\Sub}		{\bf{Sub}}
 	\DeclareMathOperator{\Tor}		{Tor}
 	\DeclareMathOperator{\y}		{\bf{}y}
@@ -309,6 +310,7 @@
 	\DeclareMathOperator{\adh}	{adh}	% Adhérence d'un ensemble
 	\DeclareMathOperator{\ins}	{int}	% Intérieur d'un ensemble
 	\DeclareMathOperator{\Ld}	{L}		% L de l'espace quotienté des fonctions intégrables
+	\DeclareMathOperator{\rel}	{rel}	% rel pour homotopie relaive à
 
 	%% Définitions
 

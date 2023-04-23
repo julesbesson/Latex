@@ -35,7 +35,7 @@
 	\def\defpropname{D\'efinition-Proposition}
 	\def\propname{Proposition}
 	\def\coropropname{Corollaire}
-	\def\thmname{Th\'eoreme}
+	\def\thmname{Th\'eorème}
 	\def\lemname{Lemme}
 	\def\coroname{Corollaire}
 	\def\statname{\'Enonc\'e}
@@ -53,6 +53,8 @@
 
 %% Commandes
 
+\newtheorem{compteur}{}[section]
+
 \newcommand{\newthm}[8][]{
 							\setlength\theorempreskipamount{0pt}%
 							\setlength\theorempostskipamount{-1pt}%
@@ -65,7 +67,8 @@
                               \def\FrameCommand{{\color{#4}\vrule width 1pt}\hspace{6pt}}
                               \MakeFramed{\advance\hsize-\width \FrameRestore}
                               \kern0ex % pour la barre de gauche
-                              \ifcat$\detokenize{##1}$
+                              \ifcat
+							  	$\detokenize{##1}$
                                 \begin{theorem_#2}%
                               \else 
                                 \begin{theorem_#2}[\text{\normalfont\itshape ##1}]%
@@ -73,19 +76,20 @@
                               {\end{theorem_#2}\endMakeFramed}
                             \makeatother
                             \theoremheaderfont{\bfseries\scshape\color{#5}} 
-                            \newtheorem{theorem_#2}{#3}
+                            \newtheorem{theorem_#2}[compteur]{#3}
                            }
 
-\newthm{definition}{\defname}{Green}{black}{nonumberbreak}{\normalfont}{:}
-\newthm{defprop}{\defpropname}{Green}{black}{nonumberbreak}{\normalfont}{:}
-\newthm{proposition}{\propname}{teal}{black}{nonumberbreak}{\normalfont}{:}
-\newthm{coroprop}{\coropropname}{cyan}{black}{nonumberbreak}{\normalfont}{:}
 
-\newthm{theorem}{\thmname}{RedOrange}{black}{nonumberbreak}{\normalfont}{:}
-\newthm{lemma}{\lemname}{purple}{black}{nonumberbreak}{\normalfont}{:}
-\newthm{corollary}{\coroname}{Peach}{black}{nonumberbreak}{\normalfont}{:}
+\newthm{definition}{\defname}{Green}{black}{changebreak}{\normalfont}{:}
+\newthm{defprop}{\defpropname}{Green}{black}{changebreak}{\normalfont}{:}
+\newthm{proposition}{\propname}{teal}{black}{changebreak}{\normalfont}{:}
+\newthm{coroprop}{\coropropname}{cyan}{black}{changebreak}{\normalfont}{:}
 
-\newthm{statement}{\statname}{Orchid}{black}{emptybreak}{\normalfont}{:}
+\newthm{theorem}{\thmname}{RedOrange}{black}{changebreak}{\normalfont}{:}
+\newthm{lemma}{\lemname}{purple}{black}{changebreak}{\normalfont}{:}
+\newthm{corollary}{\coroname}{Peach}{black}{changebreak}{\normalfont}{:}
+
+\newthm{statement}{\statname}{Orchid}{black}{changebreak}{\normalfont}{:}
 
 \theoremprework{%
 \setlength\theorempreskipamount{\topsep}\setlength\theorempostskipamount{\topsep}

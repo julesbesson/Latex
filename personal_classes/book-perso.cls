@@ -47,7 +47,7 @@
 %\renewcommand{\thechapter}{\Roman{chapter}}
 
 % Ne pas faire apparaitre le I.2, à la place juste avoir 2
-\renewcommand{\thesection}{\@Roman\c@section}
+\renewcommand{\thesection}{\@arabic\c@section}
 \renewcommand{\thesubsection}{\@arabic\c@subsection}
 
 % listes

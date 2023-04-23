@@ -1,12 +1,12 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{article-perso}
+\ProvidesClass{beamer-perso}
 
 %% Déclaration des options
 
 \newif\if@math \@mathfalse
 
 \DeclareOption{french}{	\PassOptionsToPackage{\CurrentOption}{babel}}
-\DeclareOption{english}{	\PassOptionsToPackage{\CurrentOption}{babel}
+\DeclareOption{english}{	\PassOptionsToPackage{\CurrentOption, french, main = english}{babel}
 							\PassOptionsToPackage{\CurrentOption}{mathematiques}}
 
 \DeclareOption{mathematiques}{\@mathtrue}
@@ -14,13 +14,13 @@
 \DeclareOption{diagrammes}{\PassOptionsToPackage{\CurrentOption}{mathematiques}}
 \DeclareOption{dessin}{\PassOptionsToPackage{\CurrentOption}{mathematiques}}
 
-\DeclareOption*{\PassOptionsToPackage{\CurrentOption}{geometry}}
 
 \ProcessOptions
 
 % types de documents
 
-\LoadClass[a4paper,10pt]{article}
+\LoadClass[10pt,xcolor={usenames, dvipsnames}]{beamer}
+
 
 %% Langues
 \RequirePackage{babel}
@@ -34,15 +34,6 @@
 \RequirePackage{hyperref} % Pour les liens
 \RequirePackage{enumitem} % Pour les listes à puce
 
-%% Préférences de numérotation
-
-
-%Chiffres romains
-%\renewcommand{\thechapter}{\Roman{chapter}}
-
-% Ne pas faire apparaitre le I.2, à la place juste avoir 2
-\renewcommand{\thesection}{\@arabic\c@section}
-
 % listes
 \setitemize[1]{label=$\bullet$}
 \setitemize[2]{label=-}
@@ -54,8 +45,5 @@
 	\RequirePackage{mathematiques}
 \fi
 
-\RequirePackage{geometry}
-
-\pagestyle{headings}
 \RequirePackage{caption}
 \DeclareCaptionFormat{sanslabel}{#3}%
